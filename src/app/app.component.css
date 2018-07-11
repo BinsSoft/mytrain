@@ -1,0 +1,9 @@
+mat-drawer-container {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+mat-drawer a {
+	text-decoration: none;
+	color: #585858;
+}

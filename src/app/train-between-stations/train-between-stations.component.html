@@ -1,0 +1,38 @@
+<mat-card>
+<form class="signup-form" [formGroup]="form">
+	<mat-form-field class="text-full-width">
+	
+	    <input type="hidden" formControlName="source" >
+	    <input type="text" placeholder="Source" [formControl]="sourceSearch" matInput [matAutocomplete]="auto">
+	    <mat-autocomplete #auto="matAutocomplete" >
+	      <mat-option (click)="form.controls['source'].setValue(item.id)" *ngFor="let item of searchSourceResult" [value]="item.display">
+	        {{ item.display }}
+	      </mat-option>
+	    </mat-autocomplete>
+	</mat-form-field>
+
+	<mat-form-field class="text-full-width">
+	    <input type="hidden" formControlName="destination" >
+	    <input type="text" placeholder="Destination" [formControl]="destinationSearch"  matInput  [matAutocomplete]="auto1">
+	    <mat-autocomplete #auto1="matAutocomplete">
+	      <mat-option (click)="form.controls['destination'].setValue(item.id)" *ngFor="let item of searchDestResult" [value]="item.display">
+	        {{ item.display }}
+	      </mat-option>
+	    </mat-autocomplete>
+	</mat-form-field>
+	<mat-card-actions style="text-align: right;">
+		<button mat-raised-button color="primary"  (click)="search()" [disabled]="form.invalid">Search</button>
+	</mat-card-actions>
+	</form>
+</mat-card>
+<mat-card>
+	<table  class="text-full-width">
+      <tr *ngFor="let train of trainList">
+      	<td>
+      	<p><strong>{{ train.number }} - {{ train.name }}</strong>({{ train.name_hi }})</p>
+      	<p><strong>Departure </strong> - {{ train.start }}</p>
+      	<p><strong>Arrival </strong> - {{ train.end }}</p>
+      	</td>
+      </tr>
+    </table>
+</mat-card>

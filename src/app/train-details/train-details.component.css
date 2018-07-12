@@ -20,11 +20,15 @@ span.status {
     border-right: 1px solid #FFF;
 }
 .availibity-box table td.WL{
-	background: #ffd03e94;
+	background: #ffeaaa;
 }
 .availibity-box table td.RAC{
 	background: #f34848;
 	color : #FFF;
+}
+.availibity-box table td.CNF{
+	background: #43e286;
+    color: #3c3c3c;
 }
 span.avail-header {
     padding: 6px;

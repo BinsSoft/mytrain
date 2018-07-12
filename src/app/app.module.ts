@@ -7,18 +7,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import  {MaterialModule} from './material/material.module';
 import {TrainService} from './train.service';
-
+import {Global} from './global.config';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { TrainBetweenStationsComponent } from './train-between-stations/train-between-stations.component';
+import { TrainDetailsComponent } from './train-details/train-details.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    TrainBetweenStationsComponent
+    TrainBetweenStationsComponent,
+    TrainDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,7 @@ import { TrainBetweenStationsComponent } from './train-between-stations/train-be
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [TrainService],
+  providers: [TrainService,Global],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

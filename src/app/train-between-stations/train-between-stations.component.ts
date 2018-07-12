@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl , FormGroup,  Validators  } from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 import {TrainService} from '../train.service';
+import {Global} from '../global.config';
+
 @Component({
   selector: 'app-train-between-stations',
   templateUrl: './train-between-stations.component.html',
@@ -16,11 +19,22 @@ export class TrainBetweenStationsComponent implements OnInit {
 	destinationSearch : FormControl = new FormControl;
 	searchSourceResult : any = [];
 	searchDestResult : any =[];
-	constructor(private train : TrainService) {
+	constructor(private train : TrainService, private activateRoute : ActivatedRoute, private route : Router, private global : Global) {
 		 this.form = new FormGroup({
 	      source : new FormControl('',[Validators.required]),
 	      destination : new FormControl('',[Validators.required]),
 	    });
+
+		 if (this.global.searchStations) {
+			this.destinationSearch.setValue(this.global.searchStations.dest.name);
+			this.sourceSearch.setValue(this.global.searchStations.source.name);
+			this.form.setValue({
+				source : this.global.searchStations.source.value,
+				destination : this.global.searchStations.dest.value
+			})
+			this.search();
+		}
+
 		this.sourceSearch.valueChanges.subscribe(data=>{
 			this.form.controls['source'].setValue('');
 			if (data.length > 1) {
@@ -46,10 +60,23 @@ export class TrainBetweenStationsComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		
 	}
 	trainList : any = [];
 	search()
 	{
+		let searchData = {
+			dest : {
+				value : this.form.value.destination,
+				name : this.destinationSearch.value
+			},
+			source : {
+				value : this.form.value.source,
+				name : this.sourceSearch.value
+			}
+		}
+		this.global.setSearchStations(searchData);
+
 		this.train.searchTrainBetweenStations(this.form.value).subscribe((data)=>{
 			this.trainList = [];
 			if (data['body']) {
@@ -58,6 +85,41 @@ export class TrainBetweenStationsComponent implements OnInit {
 				}
 			}
 		})
+	}
+
+	reloadPage()
+	{
+		this.form.controls['destination'].setValue('');
+		this.destinationSearch.setValue('');
+		this.form.controls['source'].setValue('');
+		this.sourceSearch.setValue('');
+		this.trainList = [];
+	}
+
+	exchangeSearch()
+	{
+		let dest = {
+			value : this.form.value.destination,
+			display : this.destinationSearch.value
+		}
+		let source = {
+			value : this.form.value.source,
+			display : this.sourceSearch.value
+		}
+		this.destinationSearch.setValue(source.display);
+		this.sourceSearch.setValue(dest.display);
+		this.form.setValue({
+			source : dest.value,
+			destination : source.value
+		})
+		this.search();
+
+
+	}
+
+	goToTrainDetails(trainId)
+	{
+		this.route.navigate(['train-details/', trainId, this.form.get('source').value,  this.form.get('destination').value])
 	}
 
 }

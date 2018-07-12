@@ -1,0 +1,49 @@
+span.couch {
+    display: block;
+    font-weight: bold;
+    text-align: center;
+}
+span.status {
+    font-size: 12px;
+    text-align: center;
+    display: block;
+    margin-top: 6px;
+}
+.availibity-box, .train-stations-list {
+	margin-bottom: 5px;
+}
+.availibity-box table td {
+	width: 25%;
+	padding: 5px;
+    font-size: 12px;
+    color: #4a4a4a;
+    border-right: 1px solid #FFF;
+}
+.availibity-box table td.WL{
+	background: #ffd03e94;
+}
+.availibity-box table td.RAC{
+	background: #f34848;
+	color : #FFF;
+}
+span.avail-header {
+    padding: 6px;
+    background: #3f51b5;
+    display: block;
+    color: #FFF;
+    border-radius: 3px 3px 0 0;
+}
+.train-stations-list {
+	font-size: 13px;
+	text-align: left;
+}
+.train-stations-list table strong {
+	display: block;
+}
+.train-stations-list table span {
+	display: block;
+}
+.train-stations-list .station-heading {
+	border-bottom: 1px solid #CCC;
+	padding: 5px 3px;
+}

@@ -10,7 +10,7 @@
 	      </mat-option>
 	    </mat-autocomplete>
 	</mat-form-field>
-
+	
 	<mat-form-field class="text-full-width">
 	    <input type="hidden" formControlName="destination" >
 	    <input type="text" placeholder="Destination" [formControl]="destinationSearch"  matInput  [matAutocomplete]="auto1">
@@ -21,18 +21,32 @@
 	    </mat-autocomplete>
 	</mat-form-field>
 	<mat-card-actions style="text-align: right;">
-		<button mat-raised-button color="primary"  (click)="search()" [disabled]="form.invalid">Search</button>
+		<button mat-raised-button color="primary"  (click)="exchangeSearch()" [disabled]="form.invalid"><i class="fa fa-exchange" aria-hidden="true"></i> Exchange</button>
+		<button mat-raised-button color="primary"  (click)="search()" [disabled]="form.invalid"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+		<button mat-raised-button color="warn"  (click)="reloadPage()" [disabled]="form.invalid"><i class="fa fa-repeat" aria-hidden="true"></i> Reset</button>
+		
 	</mat-card-actions>
 	</form>
 </mat-card>
 <mat-card>
-	<table  class="text-full-width">
-      <tr *ngFor="let train of trainList">
-      	<td>
-      	<p><strong>{{ train.number }} - {{ train.name }}</strong>({{ train.name_hi }})</p>
-      	<p><strong>Departure </strong> - {{ train.start }}</p>
-      	<p><strong>Arrival </strong> - {{ train.end }}</p>
-      	</td>
-      </tr>
-    </table>
+	<mat-card *ngIf="trainList.length == 0"  class="text-center">No Train found</mat-card>
+	<div *ngFor="let train of trainList" class="train-search-list">
+		<mat-card >
+	      	<p><strong>{{ train.number }} - {{ train.name }}</strong>({{ train.name_hi }})</p>
+	      	<p><strong>{{ train.train_type }}</strong></p>
+	      	<table class="text-full-width">
+	      	<tr>
+	      	<td><strong class="block-display">Departure </strong>  <span class="table-sub-content">{{ train.start }}</span></td>
+	      	<td><strong class="block-display">Arrival </strong>  <span class="table-sub-content">{{ train.end }}</span></td>
+	      	<td><strong class="block-display">Travel Time </strong>  <span class="table-sub-content">{{ train.travel_time}} H</span></td>
+	      	<td  class="text-center">
+      			<button mat-mini-fab color="primary" (click)="goToTrainDetails(train.id)">Go</button>
+      		</td>
+	      	</tr>
+	      	<tr>
+	      		
+	      	</tr>
+	      	</table>
+        </mat-card>
+    </div>
 </mat-card>

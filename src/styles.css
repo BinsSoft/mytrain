@@ -1,4 +1,32 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body {
+	margin: 0;
+}
 .text-full-width {
 	width: 100%;
+}
+.text-center {
+	text-align: center;
+}
+.text-right {
+	text-align: right;
+}
+.block-display{
+	display: block;
+}
+.auto-center {
+	margin: 0 auto;
+}
+
+.day-run-table td {
+	padding: 5px;
+	border-right: 1px solid #FFF;
+}
+.active {
+	background: #3f51b5;
+	color: #FFF;
+}
+.in-active {
+	background: #ff4081;
+	color: #FFF;
 }

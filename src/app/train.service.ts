@@ -17,10 +17,11 @@ export class TrainService {
 		};
 	 }
 
-	getTrainDetails(trainNo) {
-		let url = this.api+'train-details/'+trainNo;
+	getTrainDetails(postData) {
+		
+		let url = this.api+'train-details';
 
-		return this.http.get(url,this.httpOptions);
+		return this.http.post(url, JSON.stringify(postData), this.httpOptions);
 	}
 
 	searchStationByCode(searchValue) {
@@ -30,5 +31,20 @@ export class TrainService {
 	searchTrainBetweenStations(formData) {
 		return this.http.post(this.api+'train-between-stations', JSON.stringify(formData), this.httpOptions);
 	}
+
+	runDays(dayStr)
+	{
+		let dayDisplayArr = ['S','M','T','W','T','F','S'];
+		let dayArr = dayStr.split('');
+		var returnData = [];
+		for(let d in dayDisplayArr) {
+			returnData.push({
+				day : dayDisplayArr[d],
+				status : dayArr[d]
+			})
+		}
+		return returnData;
+	}
+
 
 }

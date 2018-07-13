@@ -7,6 +7,7 @@ import {MatSidenavModule, MatDividerModule, MatListModule} from '@angular/materi
 })
 export class AppComponent {
   title = 'app';
+  loader: boolean = false;  
   randomName(start: any) {
         start.toggle();
     }

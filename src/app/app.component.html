@@ -1,5 +1,8 @@
 <div class="main-container">
 <mat-toolbar color="primary" ><span (click)="randomName(start)"><i class="fa fa-list"></i></span>&nbsp;&nbsp; My Train</mat-toolbar>
+<div id="page-loader" *ngIf="loader==true">
+  <div class="spinner"></div>
+</div>
 <mat-drawer-container  class="example-container">
   <mat-drawer mode="over" #start [opened]="false">
     <mat-list>

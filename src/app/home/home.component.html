@@ -1,6 +1,12 @@
 <mat-card>
 <mat-form-field class="text-full-width">
-    <input matInput type="number" placeholder="Train No" value="" [(ngModel)]="trainNo">
+    <input  type="hidden" placeholder="Train No" value="" [(ngModel)]="trainNo">
+    <input matInput type="text" placeholder="Train No." [formControl]="trainFormControl"  [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" >
+      <mat-option (click)="trainNo = item.id" *ngFor="let item of searchResult" [value]="item.display">
+        {{ item.display }}
+      </mat-option>
+    </mat-autocomplete>
 </mat-form-field>
 <mat-card-actions style="text-align: right;">
 	<button mat-raised-button color="primary"  (click)="search()" >Search</button>
@@ -10,6 +16,16 @@
 <mat-card *ngIf="searchAction== true">
 	<div id="page-loader" *ngIf="loader==true"></div>
 	<div *ngIf="loader==false">
+		<mat-card>
+			<p>{{ details.details.number }} - {{ details.details.name }} {{ details.train.source_status }}</p>
+			<p>{{ details.details.type_description }}</p>
+		</mat-card>
+		<mat-card>
+			<h4>Current Possition</h4>
+			<p>{{ details.train.source_name }} ({{ details.train.source_code }})</p>
+			<p>Delay : {{ details.train.lateMins }} min</p>
+			<p>Updated : {{ details.train.lastUpdatedActual }}</p>
+		</mat-card>
 		<table class="text-full-width live-status-list" cellspacing="0" cellpadding="0">
 			<tr *ngFor="let station of  details.stations" class="{{ (station.is_stoppage==0)?'no-stoppage':'stoppage' }}">
 				<td>
@@ -18,7 +34,7 @@
 					<p>{{ station.actual_arrival_time }}</p>
 					<p class="{{ (station.delay_arrival >0)?'delay':'before-time' }}">{{ station.delay_arrival }} min</p>
 				</td>
-				<td class="status {{ ((station.is_arrived == 1 && station.is_departed==1)?'crossed':(station.is_arrived == 1 && station.is_departed==0)?'arrived':'not-arrived') }}">
+				<td class="status {{ ((details.train.source_code == station.source_code)?'arrived':'not-arrived') }}">
 					<span></span>
 				</td>
 				<td class="text-center">

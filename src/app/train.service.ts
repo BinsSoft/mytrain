@@ -25,6 +25,10 @@ export class TrainService {
 		return this.http.post(url, JSON.stringify(postData), this.httpOptions);
 	}
 
+	searchTrainByCode(trainId) {
+		return this.http.get(this.api+'train-auto-search?s='+trainId);
+	}
+
 	searchStationByCode(searchValue) {
 		let stationList = this.global.getStationList();
 		return  stationList.find((i)=>{

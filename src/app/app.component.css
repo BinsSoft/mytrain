@@ -9,16 +9,8 @@ mat-drawer a {
 	color: #585858;
 	outline: none;
 }
-#page-loader {
-	position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: rgba(255,255,255,0.6);
-    z-index: 9999;
-}
-.spinner {
+
+/*.spinner {
 	
     height: 100px;
     width: 100px;
@@ -29,4 +21,4 @@ mat-drawer a {
     background-image: url('loader.gif');
     background-repeat: no-repeat;
     background-position: center;
-}
+}*/

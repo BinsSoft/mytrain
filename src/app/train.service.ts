@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
+import {Global} from './global.config';
 @Injectable()
 export class TrainService {
 
 	//api : string = 'http://localhost:8080';
 	api : string = 'https://apibinssoft.herokuapp.com';
 	httpOptions : any ;
-	constructor(private http : HttpClient) {
+	constructor(private http : HttpClient, private global : Global) {
 		this.api += '/train-api/';
 		this.httpOptions = {
 		  headers: new HttpHeaders({'Access-Control-Allow-Origin' : "*",
@@ -25,11 +26,18 @@ export class TrainService {
 	}
 
 	searchStationByCode(searchValue) {
-		return this.http.get(this.api+'train-auto-search?s='+searchValue)
+		let stationList = this.global.getStationList();
+		return  stationList.find((i)=>{
+			return i.code.startsWith(searchValue) || i.display.startsWith(searchValue) 
+		});
 	}
 
 	searchTrainBetweenStations(formData) {
 		return this.http.post(this.api+'train-between-stations', JSON.stringify(formData), this.httpOptions);
+	}
+
+	searchTrainLiveStatus(formData) {
+		return this.http.post(this.api+'train-current-status', JSON.stringify(formData), this.httpOptions);
 	}
 
 	runDays(dayStr)

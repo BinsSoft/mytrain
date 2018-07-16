@@ -1,63 +1,65 @@
-<div class="container" *ngIf="displayStatus==true">
+<div class="container">
+	<div id="page-loader" *ngIf="loader==true"></div>
+	<div *ngIf="loader==false">
 
-	<mat-card>
+		<mat-card>
 
-		<p class="text-center"><strong>{{ details.train.train.number }} - {{ details.train.train.name }}</strong></p>
-		<table class="text-full-width">
-			<tr>
-				<td class="text-center">{{ details.train.train.source_name }} <strong>({{ details.train.train.source_code }})</strong></td>
-				<td class="text-center"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></td>
-				<td class="text-center">{{ details.train.train.destination_name }} <strong>({{ details.train.train.destination_code }})</strong></td>
-			</tr>
-		</table>
-		<p class="text-center"> <button mat-raised-button color="primary" (click)="goBackToList()"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go to List</button> </p>
-	</mat-card>
-	<br/>
-	<mat-card>
-		<table class="text-full-width text-center day-run-table" cellspacing="0" cellpadding="0">
-			<tr>
-			  <td *ngFor="let d of runData"  class="{{ (d.status == 1)?'active':'in-active' }}" >
-			    {{d.day}}
-			  </td>
-			</tr>
-		</table>
-	</mat-card>
-	<br/>
-	<mat-tab-group mat-stretch-tabs>
-	  <mat-tab label="Availibity" *ngIf="availibity.length > 0"> 
-	  	<div class="availibity-box" *ngFor="let avail of  availibity">
-			<mat-card >
-				<span class="avail-header">{{ avail.day }}</span>
-				<table class="text-full-width" cellpadding="0" cellspacing="0">
-					<tr>
-						<td *ngFor="let a of avail.result" class="{{a.class}}">
-							<span class="couch">{{a.couch}}</span>
-							<span class="status">{{a.value}}</span>
-						</td>
-					</tr>
-				</table>
-			</mat-card>
-		</div> 
-	  </mat-tab>
-	  <mat-tab label="Stations">
-	  		<div class="train-stations-list" *ngFor="let station of details.train.stations">
-	  			<mat-card>
-	  				<p class="station-heading"><strong>{{station.source_name}} - {{ station.source_code }}</strong></p>
-	  				<table class="text-full-width">
-	  					<tr>
-			  				<td><strong>Arrival</strong> <span>{{ station.arrival }}</span></td>
-			  				<td><strong>Departure</strong> <span>{{ station.departure }}</span></td>
-			  				<td><strong>Halt</strong> <span>{{ station.halt }} min</span></td>
-		  				</tr>
-		  				<tr>
-			  				<td><strong>Distance</strong> <span>{{ station.distance }} km</span></td>
-			  				<td><strong>Day</strong> <span>{{ station.day }}</span></td>
-		  				</tr>
-	  				</table>
-	  			</mat-card>
-	  		</div>
-	  </mat-tab>
-	  
-	</mat-tab-group>
-	
+			<p class="text-center"><strong>{{ details.train.train.number }} - {{ details.train.train.name }}</strong></p>
+			<table class="text-full-width">
+				<tr>
+					<td class="text-center">{{ details.train.train.source_name }} <strong>({{ details.train.train.source_code }})</strong></td>
+					<td class="text-center"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></td>
+					<td class="text-center">{{ details.train.train.destination_name }} <strong>({{ details.train.train.destination_code }})</strong></td>
+				</tr>
+			</table>
+			<p class="text-center"> <button mat-raised-button color="primary" (click)="goBackToList()"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go to List</button> </p>
+		</mat-card>
+		<br/>
+		<mat-card>
+			<table class="text-full-width text-center day-run-table" cellspacing="0" cellpadding="0">
+				<tr>
+				  <td *ngFor="let d of runData"  class="{{ (d.status == 1)?'active':'in-active' }}" >
+				    {{d.day}}
+				  </td>
+				</tr>
+			</table>
+		</mat-card>
+		<br/>
+		<mat-tab-group mat-stretch-tabs>
+		  <mat-tab label="Availibity" *ngIf="availibity.length > 0"> 
+		  	<div class="availibity-box" *ngFor="let avail of  availibity">
+				<mat-card >
+					<span class="avail-header">{{ avail.day }}</span>
+					<table class="text-full-width" cellpadding="0" cellspacing="0">
+						<tr>
+							<td *ngFor="let a of avail.result" class="{{a.class}}">
+								<span class="couch">{{a.couch}}</span>
+								<span class="status">{{a.value}}</span>
+							</td>
+						</tr>
+					</table>
+				</mat-card>
+			</div> 
+		  </mat-tab>
+		  <mat-tab label="Stations">
+		  		<div class="train-stations-list" *ngFor="let station of details.train.stations">
+		  			<mat-card>
+		  				<p class="station-heading"><strong>{{station.source_name}} - {{ station.source_code }}</strong></p>
+		  				<table class="text-full-width">
+		  					<tr>
+				  				<td><strong>Arrival</strong> <span>{{ station.arrival }}</span></td>
+				  				<td><strong>Departure</strong> <span>{{ station.departure }}</span></td>
+				  				<td><strong>Halt</strong> <span>{{ station.halt }} min</span></td>
+			  				</tr>
+			  				<tr>
+				  				<td><strong>Distance</strong> <span>{{ station.distance }} km</span></td>
+				  				<td><strong>Day</strong> <span>{{ station.day }}</span></td>
+			  				</tr>
+		  				</table>
+		  			</mat-card>
+		  		</div>
+		  </mat-tab>
+		  
+		</mat-tab-group>
+	</div>
 </div>

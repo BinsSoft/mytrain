@@ -10,6 +10,8 @@ import {Global} from '../global.config';
   styleUrls: ['./train-between-stations.component.css']
 })
 export class TrainBetweenStationsComponent implements OnInit {
+	loader : boolean = false;
+	searchAction : boolean = false;
 	form: FormGroup;
 	station : any = {
 		source : '',
@@ -38,23 +40,21 @@ export class TrainBetweenStationsComponent implements OnInit {
 		this.sourceSearch.valueChanges.subscribe(data=>{
 			this.form.controls['source'].setValue('');
 			if (data.length > 1) {
-				this.train.searchStationByCode(data).subscribe(responseData=>{
-					this.searchSourceResult = [];
-					if (responseData != null){
-						this.searchSourceResult.push(responseData);
-					}
-				})
+				let responseData = this.train.searchStationByCode(data);
+				this.searchSourceResult = [];
+				if (responseData != null){
+					this.searchSourceResult.push(responseData);
+				}
 			}
 		})
 		this.destinationSearch.valueChanges.subscribe(data=>{
 			this.form.controls['destination'].setValue('');
 			if (data.length > 1) {
-				this.train.searchStationByCode(data).subscribe(responseData=>{
-					this.searchDestResult = [];
-					if (responseData != null){
-						this.searchDestResult.push(responseData);
-					}
-				})
+				let responseData = this.train.searchStationByCode(data)
+				this.searchDestResult = [];
+				if (responseData != null){
+					this.searchDestResult.push(responseData);
+				}
 			}
 		})
 	}
@@ -65,6 +65,8 @@ export class TrainBetweenStationsComponent implements OnInit {
 	trainList : any = [];
 	search()
 	{
+		this.searchAction = true;
+		this.loader = true;
 		let searchData = {
 			dest : {
 				value : this.form.value.destination,
@@ -79,6 +81,7 @@ export class TrainBetweenStationsComponent implements OnInit {
 
 		this.train.searchTrainBetweenStations(this.form.value).subscribe((data)=>{
 			this.trainList = [];
+			this.loader = false;
 			if (data['body']) {
 				if (data['body'].trains.length > 0) {
 					this.trainList = data['body'].trains;

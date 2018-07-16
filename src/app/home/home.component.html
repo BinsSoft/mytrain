@@ -6,3 +6,31 @@
 	<button mat-raised-button color="primary"  (click)="search()" >Search</button>
 </mat-card-actions>
 </mat-card>
+
+<mat-card *ngIf="searchAction== true">
+	<div id="page-loader" *ngIf="loader==true"></div>
+	<div *ngIf="loader==false">
+		<table class="text-full-width live-status-list" cellspacing="0" cellpadding="0">
+			<tr *ngFor="let station of  details.stations" class="{{ (station.is_stoppage==0)?'no-stoppage':'stoppage' }}">
+				<td>
+					<p><span *ngIf="station.is_source == 1">Start</span>
+					<span *ngIf="station.is_source == 0">{{ station.arrival_time }}</span></p>
+					<p>{{ station.actual_arrival_time }}</p>
+					<p class="{{ (station.delay_arrival >0)?'delay':'before-time' }}">{{ station.delay_arrival }} min</p>
+				</td>
+				<td class="status {{ ((station.is_arrived == 1 && station.is_departed==1)?'crossed':(station.is_arrived == 1 && station.is_departed==0)?'arrived':'not-arrived') }}">
+					<span></span>
+				</td>
+				<td class="text-center">
+					<p>{{ station.source_name+'('+ station.source_code +')' }}</p>
+					<p>{{ station.distance }}km</p>
+				</td>
+				<td  class="text-right">
+					<p><span>{{ station.departure_time }}</span></p>
+					<p>{{ station.actual_departure_time }}</p>
+					<p class="{{ (station.delay_departure >0)?'delay':'before-time' }}">{{ station.delay_departure }} min</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+</mat-card>

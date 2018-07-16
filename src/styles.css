@@ -30,3 +30,9 @@ body {
 	background: #ff4081;
 	color: #FFF;
 }
+
+#page-loader {
+	background-size: contain;
+    min-height: 350px;
+    background-image: url('loader-1.gif');
+}

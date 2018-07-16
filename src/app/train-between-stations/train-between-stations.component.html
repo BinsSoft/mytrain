@@ -28,25 +28,28 @@
 	</mat-card-actions>
 	</form>
 </mat-card>
-<mat-card>
-	<mat-card *ngIf="trainList.length == 0"  class="text-center">No Train found</mat-card>
-	<div *ngFor="let train of trainList" class="train-search-list">
-		<mat-card >
-	      	<p><strong>{{ train.number }} - {{ train.name }}</strong>({{ train.name_hi }})</p>
-	      	<p><strong>{{ train.train_type }}</strong></p>
-	      	<table class="text-full-width">
-	      	<tr>
-	      	<td><strong class="block-display">Departure </strong>  <span class="table-sub-content">{{ train.start }}</span></td>
-	      	<td><strong class="block-display">Arrival </strong>  <span class="table-sub-content">{{ train.end }}</span></td>
-	      	<td><strong class="block-display">Travel Time </strong>  <span class="table-sub-content">{{ train.travel_time}} H</span></td>
-	      	<td  class="text-center">
-      			<button mat-mini-fab color="primary" (click)="goToTrainDetails(train.id)">Go</button>
-      		</td>
-	      	</tr>
-	      	<tr>
-	      		
-	      	</tr>
-	      	</table>
-        </mat-card>
+<mat-card *ngIf="searchAction== true">
+	<div id="page-loader" *ngIf="loader==true"></div>
+	<div *ngIf="loader==false">
+		<mat-card *ngIf="trainList.length == 0"  class="text-center">No Train found</mat-card>
+		<div *ngFor="let train of trainList" class="train-search-list">
+			<mat-card >
+		      	<p><strong>{{ train.number }} - {{ train.name }}</strong>({{ train.name_hi }})</p>
+		      	<p><strong>{{ train.train_type }}</strong></p>
+		      	<table class="text-full-width">
+		      	<tr>
+		      	<td><strong class="block-display">Departure </strong>  <span class="table-sub-content">{{ train.start }}</span></td>
+		      	<td><strong class="block-display">Arrival </strong>  <span class="table-sub-content">{{ train.end }}</span></td>
+		      	<td><strong class="block-display">Travel Time </strong>  <span class="table-sub-content">{{ train.travel_time}} H</span></td>
+		      	<td  class="text-center">
+	      			<button mat-mini-fab color="primary" (click)="goToTrainDetails(train.id)">Go</button>
+	      		</td>
+		      	</tr>
+		      	<tr>
+		      		
+		      	</tr>
+		      	</table>
+	        </mat-card>
+	    </div>
     </div>
 </mat-card>

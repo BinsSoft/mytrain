@@ -1,12 +1,11 @@
 <div class="main-container">
-<mat-toolbar color="primary" ><span (click)="randomName(start)"><i class="fa fa-list"></i></span>&nbsp;&nbsp; My Train</mat-toolbar>
-<div id="page-loader" *ngIf="loader==true">
-  <div class="spinner"></div>
-</div>
+<mat-toolbar color="primary"  class=" text-full-width"><span (click)="randomName(start)"><i class="fa fa-list"></i></span>&nbsp;&nbsp; My Train
+</mat-toolbar>
+
 <mat-drawer-container  class="example-container">
   <mat-drawer mode="over" #start [opened]="false">
     <mat-list>
-      <mat-list-item><a href="#/" (click)="randomName(start)">Search Train</a></mat-list-item>
+      <mat-list-item><a href="#/" (click)="randomName(start)">Live Train Status</a></mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item><a href="#/train-between-stations" (click)="randomName(start)"> Train Between Stations</a></mat-list-item>
       <mat-divider></mat-divider>

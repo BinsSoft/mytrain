@@ -12,11 +12,21 @@ export class HomeComponent implements OnInit {
 
 	ngOnInit() {
 	}
+	loader : boolean = false;
+	searchAction : boolean = false;
+	details : any = {};
 	search()
 	{
-		this.train.getTrainDetails(this.trainNo).subscribe((data)=>{
-			console.log(data);	
-		})
+		if (this.trainNo != ''){
+			this.loader = true;
+			this.searchAction = true;
+			this.train.searchTrainLiveStatus({trainid : this.trainNo}).subscribe((data)=>{
+				this.loader = false;
+				
+	    		this.details = data['body'];
+	    		
+			})
+		}
 		
 	}
 

@@ -12,17 +12,17 @@ export class TrainDetailsComponent implements OnInit {
   constructor(private train : TrainService, private activateRoute : ActivatedRoute, private route : Router) { }
   params : any = [];
   details : any = {};
-  displayStatus : boolean = false;
   runData : any = [];
   availibity : any = [];
-  
+  loader : boolean = false;
   ngOnInit() {
   	this.activateRoute.params.subscribe(params => {
     	this.params = params;
+    	this.loader = true;
     	this.train.getTrainDetails(this.params).subscribe((data)=> {
+    		this.loader = false;
     		this.details = data['body'];
     		this.runData = this.train.runDays(this.details['train']['train']['runson']);
-    		this.displayStatus = true;
 
     		this.availibity = [];
 
@@ -40,7 +40,6 @@ export class TrainDetailsComponent implements OnInit {
     			}
     			this.availibity.push(row);
     		}
-    		console.log(this.availibity);
     	});
     });
   }
